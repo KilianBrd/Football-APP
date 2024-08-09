@@ -1,0 +1,439 @@
+* {
+    font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h2, h3, p {
+    margin: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+nav {
+  padding: 5px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  z-index: 1;
+}
+nav .logo {
+  display: flex;
+  align-items: center;
+}
+nav .logo img {
+  height: 25px;
+  width: auto;
+  margin-right: 10px;
+}
+nav .logo h1 {
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #b927fc 0%, #2c64fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li {
+  margin-left: 1.5rem;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 95%;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #f5f5f5;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 1px;
+  background-color: #1f1f1f;
+  display: block;
+  margin: 7px auto;
+  transition: all 0.3s ease-in-out;
+}
+.hamburger-active {
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.6s;
+  transform: rotate(45deg);
+}
+
+.hamburger-active .line:nth-child(2) {
+  width: 0px;
+}
+
+.hamburger-active .line:nth-child(1),
+.hamburger-active .line:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.hamburger-active .line:nth-child(1) {
+  transform: translateY(12px);
+}
+
+.hamburger-active .line:nth-child(3) {
+  transform: translateY(-5px) rotate(90deg);
+}
+
+.menubar {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 60%;
+  height: 100vh;
+  padding: 20% 0;
+  background: rgba(255, 255, 255);
+  transition: all 0.5s ease-in;
+  z-index: 2;
+}
+.active {
+  left: 0;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.menubar ul {
+  padding: 0;
+  list-style: none;
+}
+.menubar ul li {
+  margin-bottom: 32px;
+}
+
+.menubar ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 95%;
+  font-weight: 400;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.menubar ul li a:hover {
+  background-color: #f5f5f5;
+}
+
+.profil {
+    width: 10em;
+    height: 10em;
+    border-radius: 10000px;
+}
+
+.card {
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5%;
+    border-radius: 2%;
+    background-color: #B6D8F2;
+}
+
+.all-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-left: 5px;
+    margin-top: 2%;
+}
+
+.recherche {
+    margin: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    height: 100px; /* Ajuste la hauteur si nécessaire */
+}
+
+.recherche form {
+    display: flex; /* Permet de garder le bouton et l'input sur la même ligne */
+    justify-content: center;
+    align-items: center;
+}
+
+.searchPlayer {
+    padding: 10px;
+    width: 300px; /* Ajuste la largeur de l'input */
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.recherche form button {
+    padding: 10px;
+    background-color: #007BFF; /* Couleur du bouton */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.recherche form button:hover {
+    background-color: #0056b3; /* Couleur du bouton au survol */
+}
+
+.card-solo {
+    border: 2px solid grey; /* Exemple de bordure */
+    width: 400px; /* Taille fixe optionnelle */
+    min-height: 450px; /* Hauteur minimale, la carte peut s'agrandir au-delà si nécessaire */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligner les éléments en haut */
+    align-items: center; /* Centrer les éléments horizontalement */
+}
+
+.card-top {
+    background-color: #B8CBD0;
+    text-align: center;
+    width: 100%; /* Assurer que l'élément prenne toute la largeur de la carte */
+    padding: 10px 0; /* Ajouter un peu de padding pour que le contenu respire */
+}
+
+.card-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Assurer que l'élément prenne toute la largeur de la carte */
+    padding: 10px; /* Ajouter du padding pour éviter que le texte touche les bords */
+    box-sizing: border-box; /* Inclure le padding dans les dimensions de l'élément */
+}
+
+.container {
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.profil-solo {
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    border: solid 2px white;
+    position: relative;
+    top: 30px;
+}
+
+
+.nom-prenom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #137C8B;
+}
+
+.age {
+    color: #709CA7 ;
+    margin-top: 2%;
+    text-transform: uppercase;
+}
+
+.nation-club {
+    color: #7A90A4;
+    margin-top: 2%;
+}
+
+.poste {
+    color: #344D59;
+    margin-top: 4%;
+}
+
+.appreciation {
+    text-align: center;
+    margin-top: 1%;
+    word-wrap: break-word; /* Forcer le retour à la ligne pour les mots longs */
+    overflow-wrap: break-word; /* Autre option pour gérer le retour à la ligne */
+    overflow: hidden; /* Empêcher le débordement hors de la carte */
+    text-overflow: ellipsis; /* Ajouter des points de suspension si le texte est trop long */
+    max-width: 100%; /* Assure que le texte ne dépasse pas la largeur de la carte */
+}
+
+
+.appreciation a {
+    text-decoration: none;
+}
+
+.add-appreciation-form{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-appreciation-form input {
+
+    color: rgba(0,0,0,.87);
+    border-bottom-color: rgba(0,0,0,.42);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .009375em;
+    text-decoration: inherit;
+    text-transform: inherit;
+    width: 80%;
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-bottom: 1px solid;
+    padding-right: 15%;
+    border-radius: 4px 4px 0 0;
+    background: rgb(243, 180, 180);
+    height: 56px;    
+}
+
+.add-appreciation-form input:focus{
+    border-color: #6200ee;
+}
+
+.add-appreciation-form input:hover{
+    border-bottom-color: rgba(0,0,0,.87);
+    background: #b1afaf;
+}
+
+.add-appreciation-form button {
+    
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #616467;
+    box-shadow: inset 0 0 0 2px #616467;
+    background-color: transparent;
+    height: 48px;
+    margin-top: 0.8%;
+}
+
+.add-appreciation-form button:hover{
+    color: #fff;
+    background-color: #616467;
+}
+
+.delete {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+   }
+   
+   .delete, .delete span {
+    transition: 200ms;
+   }
+   
+   .delete .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   .delete .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   .delete svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+   .delete:hover {
+    background: #ff3636;
+   }
+   
+   .delete:hover .text {
+    color: transparent;
+   }
+   
+   .delete:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   .delete:focus {
+    outline: none;
+   }
+   
+   .delete:active .icon svg {
+    transform: scale(0.8);
+   }
+
+.delete-link {
+    text-decoration: none;
+    margin-top: 2%;
+}
+
+.moyenne {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.add-rating-link {
+    text-decoration: none;
+}
+@media screen and (max-width: 790px) {
+  .hamburger {
+    display: block;
+  }
+  nav ul {
+    display: none;
+  }
+}
+
