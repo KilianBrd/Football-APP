@@ -1,0 +1,161 @@
+/* Style général pour la section des matchs */
+.matches-section {
+    margin: 0 auto;
+    width: 85%;
+}
+
+/* Section pour chaque groupe de matchs */
+.match-section {
+    margin-bottom: 20px;
+}
+
+/* Titre de chaque section */
+.section-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* Carte de chaque match */
+.match-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pour les matchs finis */
+.match-card.finished {
+    background-color: #e0ffe0; /* Couleur différente pour les matchs finis */
+}
+
+/* Pour les prochains matchs */
+.match-card.scheduled {
+    background-color: #e0e0ff; /* Couleur différente pour les prochains matchs */
+}
+
+/* Informations du match */
+.match-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Nom des équipes avec logo */
+.team-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+/* Image du logo du club */
+.logo-club {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* Espacement entre l'image et le texte */
+}
+
+/* Cercle pour les scores */
+.score-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 1.8%;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    margin: 0 10px;
+}
+
+
+/* Conteneur principal */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres des sections */
+.section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+/* Espacement entre les sections */
+.section-spacing {
+    margin-bottom: 20px;
+    margin-left: 2%;
+}
+
+/* Liste des joueurs */
+.joueur-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.joueur-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+    font-size: 1em;
+    text-align: center;
+}
+
+.joueur-list li:last-child {
+    border-bottom: none;
+}
+
+/* Styles spécifiques pour chaque type de joueur */
+
+/* Gardiens */
+.gardiens .section-title {
+    color: #0066cc; /* Couleur bleue pour les gardiens */
+}
+
+.gardiens .joueur-list li {
+    background-color: #e6f0ff; /* Arrière-plan léger pour les gardiens */
+}
+
+/* Défenseurs */
+.defenseurs .section-title {
+    color: #ff9900; /* Couleur orange pour les défenseurs */
+}
+
+.defenseurs .joueur-list li {
+    background-color: #fff4e6; /* Arrière-plan léger pour les défenseurs */
+}
+
+/* Milieux */
+.milieux .section-title {
+    color: #009900; /* Couleur verte pour les milieux */
+}
+
+.milieux .joueur-list li {
+    background-color: #e6ffe6; /* Arrière-plan léger pour les milieux */
+}
+
+/* Attaquants */
+.attaquants .section-title {
+    color: #cc0000; /* Couleur rouge pour les attaquants */
+}
+
+.attaquants .joueur-list li {
+    background-color: #ffe6e6; /* Arrière-plan léger pour les attaquants */
+}

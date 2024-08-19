@@ -188,7 +188,7 @@ nav ul li a:hover {
 
 .searchPlayer {
     padding: 10px;
-    width: 300px; /* Ajuste la largeur de l'input */
+    width: 270px; /* Ajuste la largeur de l'input */
     margin-right: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -267,6 +267,7 @@ nav ul li a:hover {
 .nation-club {
     color: #7A90A4;
     margin-top: 2%;
+    text-align: center;
 }
 
 .poste {
@@ -425,9 +426,177 @@ nav ul li a:hover {
     margin-top: 2%;
 }
 
+.agemin, .agemax {
+    padding: 10px;
+    width: 150px; /* Ajuste la largeur de l'input */
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.agemax{
+    margin-left: 1%;
+}
+
 .add-rating-link {
     text-decoration: none;
 }
+
+.initial {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+}
+
+.body-player{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-player{
+    width: 680px;
+}
+
+.entryarea{
+    position: relative;
+    height: 80px;
+    line-height: 80px;
+    margin-top: 2%;
+}
+
+.input-add {
+    position: absolute;
+    width: 100%;
+    outline: none;
+    font-size: 2.2em;
+    padding: 0 30px;
+    line-height: 80px;
+    border-radius: 10px;
+    border: solid 2px #DAAB3A;
+    background: transparent ;
+    transition: 0.1s ease;
+    z-index: 1111;
+}
+
+.labelline {
+    position: absolute;
+    font-size: 1.6em;
+    color: #DAAB3A;
+    padding: 0 25px;
+    margin: 0 20px;
+    background-color: white;
+    transition: 0.2s ease;
+}
+
+.input-add:focus + .labelline,
+.input-add:valid + .labelline{
+    color: #EEE6D8;
+    border: solid 4px #EEE6D8;
+    line-height: 30px;
+    transform: translate(-15px, -16px);
+}
+
+.paysdrapeau {
+  width: 5%;
+  margin-left: 8px;
+  justify-content: center;
+}
+
+.club-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Carte individuelle pour chaque club */
+.club-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet de survol pour les cartes */
+.club-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour le logo du club */
+.club-logo {
+  background-color: #fafafa;
+  padding: 20px;
+}
+
+.club-logo img.club-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Informations sur le club */
+.club-details {
+  padding: 20px;
+}
+
+.club-name {
+  font-size: 24px;
+  color: #222;
+  margin: 0;
+}
+
+.club-foundation {
+  font-size: 18px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.club-stadium {
+  font-size: 16px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.logo-club {
+  width: 7%;
+  height: auto;
+}
+
+.club-petit-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Assure-toi que le conteneur principal occupe toute la hauteur de la fenêtre */
+.container-club-solo {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  height: 90vh; /* Hauteur de la fenêtre de visualisation */
+  margin-left: 2%; /* Supprime les marges par défaut */
+  justify-content: center;
+}
+
+.card-solo-club {
+  padding: 5%;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .club-card {
+      width: 90%;
+  }
+}
+
 @media screen and (max-width: 790px) {
   .hamburger {
     display: block;

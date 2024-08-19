@@ -33,7 +33,7 @@ include 'db_connexion.php';
                 <a href="../football player/add-player.php">Ajouter un joueur</a>
             </li>
             <li>
-                <a href="#">Ajouter une appréciation/note</a>
+                <a href="../football player/affiche-clubs.php">Tous les clubs</a>
             </li>
         </ul>
         <div class="hamburger">
@@ -62,20 +62,107 @@ include 'db_connexion.php';
 
     <div class="recherche">
         <form method="get">
+            <select name="agemin" id="agemin" class="agemin">
+                <option value="" selected="selected">Choisir age min.</option>
+                <?php
+                for ($i = 15; $i < 45; $i++) { ?>
+                    <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                <?php
+                }
+                ?>
+            </select>
+            <p> - </p>
+            <select name="agemax" id="agemax" class="agemax">
+                <option value="" selected="selected">Choisir age max.</option>
+                <?php
+                for ($i = 15; $i < 45; $i++) { ?>
+                    <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                <?php
+                }
+                ?>
+            </select>
+            <input list="nations" name="nation" id="nation" placeholder="Nationnalité" class="searchPlayer">
+            <datalist id="nations">
+                <?php
+                $req = $conn->prepare('SELECT PAYSNAME FROM pays');
+                $req->execute();
+                $paysname = $req->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($paysname as $pays) {
+                    echo '<option value="' . htmlspecialchars($pays['PAYSNAME']) . '">';
+                }
+                ?>
+            </datalist>
+            <input list="clubs" name="club" id="club" placeholder="Club" class="searchPlayer">
+            <datalist id="clubs">
+                <?php
+                $req = $conn->prepare('SELECT nom FROM club');
+                $req->execute();
+                $clubname = $req->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($clubname as $club) {
+                    echo '<option value="' . htmlspecialchars($club['nom']) . '">';
+                }
+                ?>
+            </datalist>
             <input type="text" name="playerSearch" id="playerSearch" placeholder="Rechercher un joueur" class="searchPlayer">
             <button type="submit" class="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
+    <div class="initial">
+        <a href="../football player/refresh.php">Réinitialiser la recherche</a>
+    </div>
     <?php
     // Base SQL query
-    $base_sql = 'SELECT * FROM joueur WHERE 1=1';
+    $base_sql = 'SELECT
+    j.id AS id,
+    j.prenom,
+    j.nom,
+    j.poste,
+    j.dateOfBirth,
+    j.nation,
+    j.appreciation as appreciation,
+    c.id AS club_id,
+    c.nom AS club,
+    c.emblem AS club_emblem,
+    c.stade AS club_stade,
+    c.fondation AS club_fondation,
+    YEAR(CURDATE()) - YEAR(j.dateOfBirth) AS age
+FROM
+    joueur j
+INNER JOIN
+    joueur_club jc ON j.id = jc.joueur_id
+INNER JOIN
+    club c ON jc.club_id = c.id
+WHERE 1=1
+';
 
     // Check if a search term is provided
     if (isset($_GET['playerSearch']) && !empty($_GET['playerSearch'])) {
         $joueur = $_GET['playerSearch'];
         // Add search condition to the base SQL
-        $base_sql .= " AND (nom LIKE :joueur OR prenom LIKE :joueur)";
+        $base_sql .= " AND (j.nom LIKE :joueur OR prenom LIKE :joueur)";
     }
+
+    if (isset($_GET['agemin']) && !empty($_GET['agemin'])) {
+        $age_min = $_GET['agemin'];
+        $base_sql .= ' AND age >= :agemin';
+    }
+
+    if (isset($_GET['agemax']) && !empty($_GET['agemax'])) {
+        $age_max = $_GET['agemax'];
+        $base_sql .= ' AND age <= :agemax';
+    }
+
+    if (isset($_GET['nation']) && !empty($_GET['nation'])) {
+        $nation = $_GET['nation'];
+        $base_sql .= ' AND nation = :nation';
+    }
+
+    if (isset($_GET['club']) && !empty($_GET['club'])) {
+        $clubsearch = $_GET['club'];
+        $base_sql .= ' AND c.nom = :club';
+    }
+
+    $base_sql .= ' ORDER BY j.nom ASC LIMIT 50';
 
     try {
         // Prepare and execute the SQL query
@@ -85,6 +172,23 @@ include 'db_connexion.php';
             // Bind the search parameter
             $sql->bindValue(':joueur', "%$joueur%");
         }
+
+        if (isset($age_min)) {
+            $sql->bindParam(':agemin', $age_min, PDO::PARAM_INT);
+        }
+
+        if (isset($age_max)) {
+            $sql->bindParam(':agemax', $age_max, PDO::PARAM_INT);
+        }
+
+        if (isset($nation)) {
+            $sql->bindParam(':nation', $nation);
+        }
+
+        if (isset($clubsearch)) {
+            $sql->bindParam(':club', $clubsearch);
+        }
+
 
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC); // Fetch all results as associative array
@@ -103,7 +207,16 @@ include 'db_connexion.php';
             <div class="all-cards">
                 <?php
                 foreach ($result as $row) {
+                    //Chercher le code pour afficher le drapeau
+                    $requetedrap = 'SELECT PAYSCODE FROM pays WHERE PAYSNAME = :nation';
+                    $reqnew = $conn->prepare($requetedrap);
+                    $reqnew->bindParam(':nation', $row['nation']);
+                    $reqnew->execute();
+                    $countryCode = $reqnew->fetchColumn();
+
+                    $img_path = '../football player/assets/pays/' . strtolower($countryCode) . '.svg';
                 ?>
+
                     <div class="container">
                         <div class="card-solo">
                             <div class="card-top">
@@ -112,7 +225,7 @@ include 'db_connexion.php';
                                 if (!empty($row["tete"])) {
                                     echo "<img class='profil-solo' src='" . htmlspecialchars($row['tete']) . "' width='50', heigth='50'>";
                                 } else {
-                                    echo "<img class='profil-solo' src='assets/default.jpg' width='100'>"; // Image par défaut si aucune image n'est disponible
+                                    echo "<img class='profil-solo' src='assets/default.jpg'>"; // Image par défaut si aucune image n'est disponible
                                 }
                                 ?>
                             </div>
@@ -136,7 +249,13 @@ include 'db_connexion.php';
                                 </p>
                                 <p class="nation-club">
                                     <?php
-                                    echo 'Nationalité : ' . htmlspecialchars($row['nation']) . '<p class="nation-club"> Club : ' . htmlspecialchars($row['club']) . '</p>'; ?>
+                                    echo 'Nationalité : ' . htmlspecialchars($row['nation']) . '<img src="' . $img_path . '" class="paysdrapeau">'; ?>
+                                </p>
+                                <p class="club">
+                                <div class="club-petit-container">
+                                    <p class="nation-club"> Club : <?= htmlspecialchars($row['club']) ?></p>
+                                    <img class="logo-club" src="<?= htmlspecialchars($row['club_emblem']) ?>" alt="Emblème du Club">
+                                </div>
                                 </p>
                                 <p class="poste">
                                     <?php

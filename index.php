@@ -28,7 +28,7 @@
             <a href="../football player/add-player.php">Ajouter un joueur</a>
         </li>
         <li>
-            <a href="#">Ajouter une appréciation/note</a>
+            <a href="../football player/affiche-clubs.php">Tous les clubs</a>
         </li>
     </ul>
     <div class="hamburger">
@@ -49,7 +49,7 @@
             <a href="../football player/add-player.php">Ajouter un joueur</a>
         </li>
         <li>
-            <a href="#">Ajouter appréciation/note</a>
+            <a href="../football player/affiche-clubs.php">Tous les clubs</a>
         </li>
     </ul>
     <script src="script.js"></script>

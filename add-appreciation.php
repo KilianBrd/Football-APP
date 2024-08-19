@@ -54,7 +54,7 @@ include 'db_connexion.php';
                 <a href="../football player/add-player.php">Ajouter un joueur</a>
             </li>
             <li>
-                <a href="#">Ajouter appréciation/note</a>
+                <a href="../football player/affiche-clubs.php">Tous les clubs</a>
             </li>
         </ul>
         <script src="script.js"></script>
@@ -64,7 +64,26 @@ include 'db_connexion.php';
     $player_id = $_GET['player_id'];
 
     // Requête SQL pour récupérer les informations du joueur
-    $req = 'SELECT * FROM joueur WHERE id = :player_id';
+    $req = 'SELECT
+    j.id AS id,
+    j.prenom,
+    j.nom,
+    j.poste,
+    j.dateOfBirth,
+    j.nation,
+    c.id AS club_id,
+    c.nom AS club,
+    c.emblem AS club_emblem,
+    c.stade AS club_stade,
+    c.fondation AS club_fondation,
+    YEAR(CURDATE()) - YEAR(j.dateOfBirth) AS age
+FROM
+    joueur j
+INNER JOIN
+    joueur_club jc ON j.id = jc.joueur_id
+INNER JOIN
+    club c ON jc.club_id = c.id
+WHERE j.id = :player_id';
     $sql = $conn->prepare($req);
     $sql->bindParam(':player_id', $player_id, PDO::PARAM_INT); // Liaison correcte de l'ID
     $sql->execute();
@@ -73,6 +92,13 @@ include 'db_connexion.php';
     if (count($result) > 0) {
         // Parcourir les résultats et afficher les informations du joueur
         foreach ($result as $row) {
+            $requetedrap = 'SELECT PAYSCODE FROM pays WHERE PAYSNAME = :nation';
+            $reqnew = $conn->prepare($requetedrap);
+            $reqnew->bindParam(':nation', $row['nation']);
+            $reqnew->execute();
+            $countryCode = $reqnew->fetchColumn();
+
+            $img_path = '../football player/assets/pays/' . strtolower($countryCode) . '.svg';
     ?>
             <div class="container">
                 <div class="card-solo">
@@ -102,8 +128,7 @@ include 'db_connexion.php';
                         </p>
                         <p class="nation-club">
                             <?php
-                            echo 'Nationalité : ' . htmlspecialchars($row['nation']) . '<p class="nation-club"> Club : ' . htmlspecialchars($row['club']) . '</p>'; ?>
-                        </p>
+                            echo 'Nationalité : ' . htmlspecialchars($row['nation']) . '<img src="' . $img_path . '" class="paysdrapeau"><p class="nation-club"> Club : ' . htmlspecialchars($row['club']) . '</p>'; ?>
                         <p class="poste">
                             <?php
                             echo 'Poste : ' . htmlspecialchars($row['poste'])
