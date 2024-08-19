@@ -237,6 +237,3 @@ $results = $req->fetchAll(PDO::FETCH_ASSOC); ?>
         </ul>
     </div>
 </div>
-
-$conn = null; // Fermer la connexion à la base de données
-?>
